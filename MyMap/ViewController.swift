@@ -14,47 +14,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        inputText.delegate = self
+        myLongitude.delegate = self
+        myLatitude.delegate = self
     }
 
     @IBOutlet weak var inputText: UITextField!
     
     @IBOutlet weak var dispMap: MKMapView!
     
+    @IBOutlet weak var myLatitude: UITextField!
+    
+    @IBOutlet weak var myLongitude: UITextField!
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        if let searchKey = textField.text {
-            print(searchKey)
+        if let searchLatitude = myLatitude.text, let searchLontitude = myLongitude.text {
+            print(type(of: searchLatitude))
+            print(searchLontitude)
             
-            let geocoder = CLGeocoder()
+            let myLatitude: CLLocationDegrees = Int(searchLatitude) as? CLLocationDegrees ?? 0
+            let myLongitude: CLLocationDegrees = Int(searchLontitude) as? CLLocationDegrees ?? 0
             
-            geocoder.geocodeAddressString(searchKey, completionHandler: {(placemarks, error) in
-                if let unwrapPlacemarks = placemarks {
-                    if let firstPlacemark = unwrapPlacemarks.first {
-                        if let location = firstPlacemark.location {
-                            let targetCoordinate = location.coordinate
-                            
-                            print(targetCoordinate)
-                            
-                            //ピン操作のためのクラスをインスタンス化
-                            let pin = MKPointAnnotation()
-                            
-                            // CLGeocoderクラスのインスタンスを利用して取得した経度・緯度をピンをセットする位置情報として渡す
-                            pin.coordinate = targetCoordinate
-                            
-                            //ピンの下部に表示される検索キーワードをセット
-                            pin.title = searchKey
-                            
-                            //ピンをセットする処理
-                            self.dispMap.addAnnotation(pin)
-                            
-                            //地図の表示範囲をセット
-                            self.dispMap.region = MKCoordinateRegion(center: targetCoordinate, latitudinalMeters: 500.0, longitudinalMeters: 500.0)
-                        }
-                    }
-                }
-            })
+            
+            let center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(myLatitude, myLongitude)
+            dispMap.setCenter(center, animated: true)
+
+            let mySpan: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            let myRegion: MKCoordinateRegion = MKCoordinateRegion(center: center, span: mySpan)
+
+            dispMap.region = myRegion
+
+            self.view.addSubview(dispMap)
+            
+        
         }
         
         return true
@@ -77,3 +70,84 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+
+//
+// MapViewを生成.
+//
+//    var myMapView: MKMapView = MKMapView()
+//
+//    myMapView.frame = self.view.frame
+//
+//
+//
+//    // 経度、緯度.
+//
+//    let myLatitude: CLLocationDegrees = 37.331741
+//
+//    let myLongitude: CLLocationDegrees = -122.030333
+//
+//
+//
+//    // 中心点.
+//    let center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(myLatitude, myLongitude)
+//
+//
+//
+//    // MapViewに中心点を設定.
+//
+//    myMapView.setCenterCoordinate(center, animated: true)
+//
+//
+//
+//    // 縮尺.
+//
+//    // 表示領域.
+//
+//    let mySpan: MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+//
+//    let myRegion: MKCoordinateRegion = MKCoordinateRegionMake(center, mySpan)
+//
+//
+//
+//    // MapViewにregionを追加.
+//
+//    myMapView.region = myRegion
+//
+//
+//
+//    // viewにMapViewを追加.
+//
+//    self.view.addSubview(myMapView)
+//
+//
+//
+//    // ピンを生成.
+//
+//    var myPin: MKPointAnnotation = MKPointAnnotation()
+//
+//
+//
+//    // 座標を設定.
+//
+//    myPin.coordinate = center
+//
+//
+//
+//    // タイトルを設定.
+//
+//    myPin.title = "タイトル"
+//
+//
+//
+//    // サブタイトルを設定.
+//
+//    myPin.subtitle = "サブタイトル"
+//
+//
+//
+//    // MapViewにピンを追加.
+//
+//    myMapView.addAnnotation(myPin)
+//
+//}
+//

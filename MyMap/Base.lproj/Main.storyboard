@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8SG-W4-FXc">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lantitude" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="8SG-W4-FXc">
                                 <rect key="frame" x="0.0" y="44" width="414" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="2SN-cY-Dh6"/>
@@ -23,38 +23,50 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </textField>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-nk-ov1">
-                                <rect key="frame" x="0.0" y="78" width="414" height="784"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vuF-US-GeT">
                                 <rect key="frame" x="359" y="823" width="25" height="24"/>
                                 <connections>
                                     <action selector="changeMapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="es0-2V-jLp"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Longitude" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wBk-nX-91n">
+                                <rect key="frame" x="0.0" y="86" width="414" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="ht5-kK-vib"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JPf-nk-ov1">
+                                <rect key="frame" x="0.0" y="128" width="414" height="768"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="JPf-nk-ov1" firstAttribute="top" secondItem="8SG-W4-FXc" secondAttribute="bottom" id="DYP-UN-6wJ"/>
+                            <constraint firstItem="JPf-nk-ov1" firstAttribute="top" secondItem="wBk-nX-91n" secondAttribute="bottom" constant="8" id="8P9-Wh-bc1"/>
                             <constraint firstItem="8SG-W4-FXc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="L7W-iI-cb3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JPf-nk-ov1" secondAttribute="bottom" id="PG2-ic-Vz1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JPf-nk-ov1" secondAttribute="trailing" id="QS1-AR-GJz"/>
+                            <constraint firstItem="wBk-nX-91n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ud2-VP-Ueb"/>
+                            <constraint firstItem="JPf-nk-ov1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W20-xx-K5m"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vuF-US-GeT" secondAttribute="trailing" constant="16" id="Xen-IK-HNn"/>
+                            <constraint firstAttribute="bottom" secondItem="JPf-nk-ov1" secondAttribute="bottom" id="Zri-tb-tvB"/>
                             <constraint firstItem="8SG-W4-FXc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="a8W-Z4-886"/>
-                            <constraint firstItem="JPf-nk-ov1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="aEa-sM-dUb"/>
+                            <constraint firstItem="wBk-nX-91n" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bfr-R4-AEe"/>
+                            <constraint firstItem="JPf-nk-ov1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cVx-7O-bFN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8SG-W4-FXc" secondAttribute="trailing" id="dUA-hJ-tyQ"/>
+                            <constraint firstItem="wBk-nX-91n" firstAttribute="top" secondItem="8SG-W4-FXc" secondAttribute="bottom" constant="8" id="eYb-PU-Bxn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vuF-US-GeT" secondAttribute="bottom" constant="8" id="xaB-KS-eXL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="dispMap" destination="JPf-nk-ov1" id="hL6-5X-v4S"/>
-                        <outlet property="inputText" destination="8SG-W4-FXc" id="MNQ-iK-Av3"/>
+                        <outlet property="myLatitude" destination="8SG-W4-FXc" id="AIe-Jm-3pe"/>
+                        <outlet property="myLongitude" destination="wBk-nX-91n" id="arK-Gp-76P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-57" y="134"/>
+            <point key="canvasLocation" x="-57.971014492753625" y="133.92857142857142"/>
         </scene>
     </scenes>
 </document>
