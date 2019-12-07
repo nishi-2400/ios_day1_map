@@ -33,8 +33,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             print(type(of: searchLatitude))
             print(searchLontitude)
             
-            let myLatitude: CLLocationDegrees = Int(searchLatitude) as? CLLocationDegrees ?? 0
-            let myLongitude: CLLocationDegrees = Int(searchLontitude) as? CLLocationDegrees ?? 0
+            let myLatitude = Double(searchLatitude)!
+            let myLongitude = Double(searchLontitude)!
             
             
             let center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(myLatitude, myLongitude)
